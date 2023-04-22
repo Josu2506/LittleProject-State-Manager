@@ -1,16 +1,28 @@
+import { DataSharing } from './services/data-sharing.service';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ProjectState } from './state-management/models/project-state-manager';
+import { SourceOfTruth } from './state-management/store';
+import { HomeComponent } from './modules';
 
+
+export const ProjectStateManager = new ProjectState(SourceOfTruth);
+
+export const DataSharingState = new DataSharing()
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToolbarComponent,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
