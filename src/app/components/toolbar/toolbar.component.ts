@@ -4,8 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PeopleTableComponent } from '../people-table';
 import { SourceOfTruthKeys } from 'src/app/state-management/store';
-import { ProjectStateManager } from 'src/app/app.module';
 import { CommonModule } from '@angular/common';
+import { ProjectState } from 'src/app/state-management/models/project-state-manager';
 
 
 @Component({
@@ -16,8 +16,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent {
-  constructor(public dialog: MatDialog) {
-    ProjectStateManager.getEntity(SourceOfTruthKeys.USER)
+  constructor(private projectStateManager: ProjectState, public dialog: MatDialog) {
+    this.projectStateManager.getEntity(SourceOfTruthKeys.USER)
       .getObservable()
       .subscribe((user) => {console.log(user)});
   }
@@ -32,6 +32,6 @@ export class ToolbarComponent {
   }
 
   ngOnDestroy(): void {
-    ProjectStateManager.getEntity(SourceOfTruthKeys.USER).unsubscribe();
+    this.projectStateManager.getEntity(SourceOfTruthKeys.USER).unsubscribe();
   }
 }

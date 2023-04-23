@@ -4,7 +4,7 @@ export enum SourceOfTruthKeys {
   'USER' = 'user',
 }
 
-export const SourceOfTruth = [
+export const iniSourceOfTruth = [
   {
     key: SourceOfTruthKeys.USER,
     state: EmptyUserState,

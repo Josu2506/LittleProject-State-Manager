@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -9,14 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { Person } from 'src/app/models/people.model';
 import { People } from 'src/app/data/people';
-import { ProjectStateManager } from 'src/app/app.module';
 import { SourceOfTruthKeys, UserStateProperties } from 'src/app/state-management/store';
+import { ProjectState } from 'src/app/state-management/models/project-state-manager';
 
 @Component({
-  selector: 'app-people-table',
   standalone: true,
+  selector: 'app-people-table',
   imports: [
-    CommonModule,
     MatPaginatorModule,
     MatTableModule,
     MatFormFieldModule,
@@ -39,8 +37,8 @@ export class PeopleTableComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    ProjectStateManager.getEntity(SourceOfTruthKeys.USER).setObservableValue(20, UserStateProperties.AGE)
+  constructor(ProjectStateManager: ProjectState) {
+    ProjectStateManager.getEntity(SourceOfTruthKeys.USER).setObservableValue(20, UserStateProperties.AGE);
 
     this.dataSource = new MatTableDataSource(People);
   }

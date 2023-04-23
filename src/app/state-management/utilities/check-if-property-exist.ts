@@ -4,10 +4,12 @@ export const checkIfPropertyExist = (
   errorMessage: string
 ) => {
   const condition = state.hasOwnProperty(property);
-  return checkIfCondiitonMet(condition, errorMessage);
+  return checkIfConditionMet( {
+    met: condition, value: property
+  }, errorMessage);
 };
 
-export const checkIfCondiitonMet = (
+export const checkIfConditionMet = (
   condition: { met: boolean; value: any },
   errorMessage: string
 ) => {
